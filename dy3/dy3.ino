@@ -171,6 +171,33 @@ void loop()
 
 }
 
+void allGreen()
+{
+  analogWrite(b1Pin, 0); // off
+  analogWrite(g1Pin, brightnessHT); // on 
+  analogWrite(r1Pin, 0); // off
+  analogWrite(b2Pin, 0); // off
+  analogWrite(g2Pin, brightnessHT); // on 
+  analogWrite(r2Pin, 0); // off
+  analogWrite(b3Pin, 0); // off
+  analogWrite(g3Pin, brightnessHT); // on
+  analogWrite(r3Pin, 0); // off
+  return;
+}
+
+void allOff()
+{
+  analogWrite(b1Pin, 0); // off
+  analogWrite(g1Pin, 0); // off 
+  analogWrite(r1Pin, 0); // off
+  analogWrite(b2Pin, 0); // off
+  analogWrite(g2Pin, 0); // off 
+  analogWrite(r2Pin, 0); // off
+  analogWrite(b3Pin, 0); // off
+  analogWrite(g3Pin, 0); // off
+  analogWrite(r3Pin, 0); // off    
+  return;
+}
 
 void drumtrigger()
 {
@@ -181,21 +208,13 @@ void drumtrigger()
     brightnessLT = 255;
 
     int buttonState = !digitalRead(buttonPin); // Read the state of the button (negated for PULLUP)
-
     if (buttonState == HIGH) { // Check if the button is pressed
-      analogWrite(b1Pin, 0); // off
-      analogWrite(g1Pin, brightnessHT); // on 
-      analogWrite(r1Pin, 0); // off
-      analogWrite(b2Pin, 0); // off
-      analogWrite(g2Pin, brightnessHT); // on 
-      analogWrite(r2Pin, 0); // off
-      analogWrite(b3Pin, 0); // off
-      analogWrite(g3Pin, brightnessHT); // on
-      analogWrite(r3Pin, 0); // off
+      allGreen()
       // lock the leds to green by entering a while loop here, until the button is pressed again
       while (true) {
         int buttonState = !digitalRead(buttonPin); // all we do is read the button state over and over
         if (buttonState == HIGH) { // if the button was pressed
+          allOff()
           break; // break out of this loop
         }
       }
