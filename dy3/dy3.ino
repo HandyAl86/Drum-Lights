@@ -192,6 +192,13 @@ void drumtrigger()
       analogWrite(b3Pin, 0); // off
       analogWrite(g3Pin, brightnessHT); // on
       analogWrite(r3Pin, 0); // off
+      // lock the leds to green by entering a while loop here, until the button is pressed again
+      while (true) {
+        int buttonState = !digitalRead(buttonPin); // all we do is read the button state over and over
+        if (buttonState == HIGH) { // if the button was pressed
+          break; // break out of this loop
+        }
+      }
     } 
 
     potK = analogRead(A13);
